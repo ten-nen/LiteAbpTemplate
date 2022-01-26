@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>36cf94b0-c7e9-49a7-adb2-33c25599ce37</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <AssemblyName>LiteAbp.API</AssemblyName>
+    <RootNamespace>LiteAbp.API</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.Identity.AspNetCore" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\LiteAbp.Extensions\LiteAbp.Extensions.csproj" />
+    <ProjectReference Include="..\LiteAbp.Application\LiteAbp.Application.csproj" />
+    <ProjectReference Include="..\LiteAbp.Infrastructure\LiteAbp.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
