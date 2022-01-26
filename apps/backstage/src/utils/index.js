@@ -1,6 +1,4 @@
-/**
- * Created by PanJiaChen on 16/11/18.
- */
+import store from '@/store'
 
 /**
  * Parse the time to string
@@ -354,4 +352,8 @@ export function removeClass(ele, cls) {
     const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
     ele.className = ele.className.replace(reg, ' ')
   }
+}
+
+export function hasPermission(permission) {
+  return store.getters.permissions.filter(x => x.name === permission).length > 0
 }

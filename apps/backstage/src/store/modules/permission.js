@@ -34,7 +34,7 @@ export function filterAsyncRoutes(routes, permissions) {
   return res
 }
 
-export const fullPermissions = [{
+export const clientPermissions = [{
   title: '后台',
   name: 'Backstage',
   permissions: [{
@@ -50,8 +50,15 @@ export const fullPermissions = [{
       title: '编辑用户',
       name: 'Backstage.User.Update'
     }, {
-      title: '删除用户',
-      name: 'Backstage.User.Delete'
+      title: '设置角色',
+      name: 'Backstage.User.SetRoles',
+      permissions: [{
+        title: 'Backstage.Role.GetAllList',
+        name: 'Backstage.Role.GetAllList'
+      }, {
+        title: 'Backstage.User.GetRoles',
+        name: 'Backstage.User.GetRoles'
+      }]
     }]
   }, {
     title: '角色管理',
@@ -68,6 +75,13 @@ export const fullPermissions = [{
     }, {
       title: '删除角色',
       name: 'Backstage.Role.Delete'
+    }, {
+      title: '授权功能',
+      name: 'Backstage.Role.UpdatePermissions',
+      permissions: [{
+        title: 'Backstage.Role.GetPermissions',
+        name: 'Backstage.Role.GetPermissions'
+      }]
     }]
   }]
 }]

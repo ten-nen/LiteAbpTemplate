@@ -2,7 +2,7 @@
   <div class="app-container">
 
     <div class="filter-container">
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
+      <el-button v-if="hasPermission('Backstage.Role.Create')" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
         新增角色
       </el-button>
     </div>
@@ -15,9 +15,9 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="300">
         <template slot-scope="scope">
-          <el-button v-if="!scope.row.isStatic" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
-          <el-button type="primary" size="small" @click="handlePermission(scope)">授权</el-button>
-          <el-button v-if="!scope.row.isStatic" type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.Role.Update')" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.Role.UpdatePermissions')" type="primary" size="small" @click="handlePermission(scope)">授权</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.Role.Delete')" type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import { deepClone } from '@/utils'
-import { fullPermissions } from '@/store/modules/permission'
+import { deepClone, hasPermission } from '@/utils'
+import { clientPermissions } from '@/store/modules/permission'
 import { getRoles, addRole, deleteRole, updateRole, getRolePermissions, updateRolePermissions } from '@/api/role'
 
 const defaultRole = {
@@ -91,13 +91,14 @@ export default {
   },
   computed: {
     permissionsData() {
-      return fullPermissions
+      return clientPermissions
     }
   },
   created() {
     this.getRoles()
   },
   methods: {
+    hasPermission,
     async getRoles() {
       const res = await getRoles()
       this.rolesList = res
@@ -121,6 +122,7 @@ export default {
     handlePermission(scope) {
       this.permissionDialogVisible = true
       this.checkStrictly = true
+      this.role = deepClone(scope.row)
       this.$nextTick(async() => {
         const rolePermissions = await getRolePermissions(scope.row.id)
         this.$refs.tree.setCheckedNodes(rolePermissions)

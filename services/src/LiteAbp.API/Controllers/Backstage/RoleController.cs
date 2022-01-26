@@ -2,6 +2,7 @@
 using LiteAbp.Application.Dtos.Identity;
 using LiteAbp.Application.Dtos.Permission;
 using LiteAbp.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace LiteAbp.API.Controllers.Backstage
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<List<IdentityRoleDto>> GetAllListAsync()
         {
             return await AppServices.RoleService.GetAllListAsync();
@@ -47,14 +49,14 @@ namespace LiteAbp.API.Controllers.Backstage
         }
 
         [HttpGet]
-        [Route("{roleId}/permissions")]
-        public async Task<List<PermissionInfoDto>> GetPermissions(string roleId)
+        [Route("{roleId}/Permissions")]
+        public async Task<List<PermissionInfoDto>> GetPermissionsAsync(string roleId)
         {
             return await AppServices.RoleService.GetPermissions(roleId);
         }
 
         [HttpPut]
-        [Route("{roleId}/permissions")]
+        [Route("{roleId}/Permissions")]
         public async Task UpdatePermissionsAsync(string roleId, [FromBody] List<IdentityRolePermissionsDtoBase> input)
         {
             await AppServices.RoleService.UpdatePermissions(roleId, input);

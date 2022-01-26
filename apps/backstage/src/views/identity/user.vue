@@ -11,7 +11,7 @@
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="getPagerList">
         查询
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
+      <el-button v-if="hasPermission('Backstage.User.Create')" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
         新增用户
       </el-button>
     </div>
@@ -45,17 +45,17 @@
       <el-table-column align="center" label="是否启用">
         <template slot-scope="{row}">
           <el-switch
-            v-if="!row.isStatic"
             v-model="row.isActive"
             active-color="#13ce66"
+            :disabled="row.isStatic||!hasPermission('Backstage.User.Update')"
             @change="handleActive(row)"
           />
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作" width="300">
         <template slot-scope="scope">
-          <el-button v-if="!scope.row.isStatic" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
-          <el-button v-if="!scope.row.isStatic" type="primary" size="small" @click="handleSetRoles(scope)">设置角色</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.User.Update')" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.User.SetRoles')" type="primary" size="small" @click="handleSetRoles(scope)">设置角色</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { deepClone, parseTime } from '@/utils'
+import { deepClone, parseTime, hasPermission } from '@/utils'
 import { getPagerList, addUser, updateUser, getUserRoles, setUserRoles } from '@/api/user'
 import { getRoles } from '@/api/role'
 
@@ -176,6 +176,7 @@ export default {
     this.getPagerList()
   },
   methods: {
+    hasPermission,
     async getRoles() {
       const res = await getRoles()
       this.roles = res

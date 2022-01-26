@@ -23,14 +23,7 @@ namespace LiteAbp.API.Controllers.Backstage
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IdentityUserDto> GetAsync(Guid id)
-        {
-            return await AppServices.UserService.GetAsync(id);
-        }
-
-        [HttpGet]
-        public async Task<PagedResultDto<IdentityUserDto>> GetPagerList(GetIdentityUsersInput input)
+        public async Task<PagedResultDto<IdentityUserDto>> GetPagerListAsync(GetIdentityUsersInput input)
         {
             return await AppServices.UserService.GetPagerList(input);
         }
@@ -50,6 +43,7 @@ namespace LiteAbp.API.Controllers.Backstage
 
         [HttpGet]
         [Route("Permissions")]
+        [Authorize]
         public async Task<List<PermissionGrantInfoDto>> GetCurrentPermissionsAsync()
         {
             if (CurrentUser.Roles == null || CurrentUser.Roles.Length <= 0)
@@ -66,7 +60,7 @@ namespace LiteAbp.API.Controllers.Backstage
 
         [HttpPut]
         [Route("{id}/Roles")]
-        public async Task SetRolesAsync(Guid id,[FromBody] IdentityUserUpdateRolesDto input)
+        public async Task SetRolesAsync(Guid id, [FromBody] IdentityUserUpdateRolesDto input)
         {
             await AppServices.UserService.SetRolesAsync(id, input);
         }

@@ -19,7 +19,6 @@ namespace LiteAbp.API.Controllers.Backstage
             AppServices = appServices;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<object> GetAllListAsync()
         {

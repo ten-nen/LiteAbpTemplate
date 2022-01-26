@@ -60,7 +60,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) // for debug
 
-    if (error.status === 401) {
+    if (error.response.status === 401) {
       MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
         confirmButtonText: 'Re-Login',
         cancelButtonText: 'Cancel',
@@ -70,6 +70,13 @@ service.interceptors.response.use(
           location.reload()
         })
       })
+    } else if (error.response.status === 403) {
+      Message({
+        message: '您不具有此操作权限，请联系管理员',
+        type: 'error',
+        duration: 5 * 1000
+      })
+      return Promise.reject(error)
     }
 
     Message({

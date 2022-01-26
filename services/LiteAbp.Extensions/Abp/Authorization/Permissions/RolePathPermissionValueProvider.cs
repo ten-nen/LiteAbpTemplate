@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,10 @@ namespace LiteAbp.Extensions.Abp.Authorization.Permissions
 
         public async override Task<PermissionGrantResult> CheckAsync(PermissionValueCheckContext context)
         {
+            var ignoreAuthorize = _httpContextAccessor.HttpContext.GetEndpoint().Metadata.Any(x => x is AuthorizeAttribute && ((AuthorizeAttribute)x).Policy == null);
+            if (context.Principal != null && ignoreAuthorize)
+                return PermissionGrantResult.Granted;
+
             var roles = context.Principal?.FindAll(AbpClaimTypes.Role).Select(c => c.Value).ToArray();
 
             if (roles == null || !roles.Any())
@@ -56,6 +61,16 @@ namespace LiteAbp.Extensions.Abp.Authorization.Permissions
             Check.NotNullOrEmpty(permissionNames, nameof(permissionNames));
 
             var result = new MultiplePermissionGrantResult(permissionNames.ToArray());
+
+            var ignoreAuthorize = _httpContextAccessor.HttpContext.GetEndpoint().Metadata.Any(x => x is AuthorizeAttribute && ((AuthorizeAttribute)x).Policy == null);
+            if (context.Principal != null && ignoreAuthorize)
+            {
+                foreach (var key in result.Result.Keys)
+                {
+                    result.Result[key] = PermissionGrantResult.Granted;
+                }
+                return result;
+            }
 
             var roles = context.Principal?.FindAll(AbpClaimTypes.Role).Select(c => c.Value).ToArray();
             if (roles == null || !roles.Any())
