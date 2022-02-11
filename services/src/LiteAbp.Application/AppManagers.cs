@@ -14,26 +14,11 @@ namespace LiteAbp.Application
 {
     public class AppManagers : ITransientDependency
     {
-        public SignInManager<IdentityUser> SignInManager { get; }
-        public IdentityUserManager UserManager { get; }
-        public IdentityRoleManager RoleManager { get; }
-        public IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-        public IPermissionDefinitionManager PermissionDefinitionManager { get; }
-        public ISimpleStateCheckerManager<PermissionDefinition> SimpleStateCheckerManager { get; }
-        public AppManagers(
-            SignInManager<IdentityUser> signInManager,
-            IdentityUserManager userManager,
-            IdentityRoleManager roleManager,
-            IdentitySecurityLogManager identitySecurityLogManager,
-            IPermissionDefinitionManager permissionDefinitionManager,
-            ISimpleStateCheckerManager<PermissionDefinition> simpleStateCheckerManager)
-        {
-            SignInManager = signInManager;
-            UserManager = userManager;
-            RoleManager = roleManager;
-            IdentitySecurityLogManager = identitySecurityLogManager;
-            PermissionDefinitionManager = permissionDefinitionManager;
-            SimpleStateCheckerManager = simpleStateCheckerManager;
-        }
+        public SignInManager<IdentityUser> SignInManager { get; set; }
+        public IdentityUserManager UserManager { get; set; }
+        public IdentityRoleManager RoleManager { get; set; }
+        public IdentitySecurityLogManager IdentitySecurityLogManager { get; set; }
+        public IPermissionDefinitionManager PermissionDefinitionManager { get; set; }
+        public ISimpleStateCheckerManager<PermissionDefinition> SimpleStateCheckerManager { get; set; }
     }
 }

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\LiteAbp.Shared\LiteAbp.Shared.csproj" />
+    <ProjectReference Include="..\LiteAbp.Shared\LiteAbp.Shared.csproj" />
   </ItemGroup>
 
 </Project>

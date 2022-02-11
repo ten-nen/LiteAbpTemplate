@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\LiteAbp.Extensions\LiteAbp.Extensions.csproj" />
+	<ProjectReference Include="..\LiteAbp.Extensions\LiteAbp.Extensions.csproj" />
     <ProjectReference Include="..\LiteAbp.Domain\LiteAbp.Domain.csproj" />
     <ProjectReference Include="..\LiteAbp.Shared\LiteAbp.Shared.csproj" />
   </ItemGroup>

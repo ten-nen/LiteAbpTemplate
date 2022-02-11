@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\LiteAbp.Extensions\LiteAbp.Extensions.csproj" />
     <ProjectReference Include="..\LiteAbp.Application\LiteAbp.Application.csproj" />
     <ProjectReference Include="..\LiteAbp.Infrastructure\LiteAbp.Infrastructure.csproj" />
   </ItemGroup>
