@@ -36,7 +36,7 @@ namespace LiteAbp.API.Controllers.Backstage
 
         [HttpPut]
         [Route("{id}")]
-        public async Task UpdateAsync(Guid id, [FromBody] IdentityUserUpdateDto input)
+        public async Task UpdateAsync([FromRoute] Guid id, [FromBody] IdentityUserUpdateDto input)
         {
             await AppServices.UserService.UpdateAsync(id, input);
         }
@@ -53,14 +53,14 @@ namespace LiteAbp.API.Controllers.Backstage
 
         [HttpGet]
         [Route("{id}/Roles")]
-        public async Task<List<IdentityRoleDto>> GetRolesAsync(Guid id)
+        public async Task<List<IdentityRoleDto>> GetRolesAsync([FromRoute] Guid id)
         {
             return await AppServices.UserService.GetRolesAsync(id);
         }
 
         [HttpPut]
         [Route("{id}/Roles")]
-        public async Task SetRolesAsync(Guid id, [FromBody] IdentityUserUpdateRolesDto input)
+        public async Task SetRolesAsync([FromRoute] Guid id, [FromBody] IdentityUserUpdateRolesDto input)
         {
             await AppServices.UserService.SetRolesAsync(id, input);
         }

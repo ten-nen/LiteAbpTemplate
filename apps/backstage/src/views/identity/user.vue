@@ -224,7 +224,7 @@ export default {
 
       this.$message({
         type: 'success',
-        message: '禁用成功!'
+        message: '操作成功!'
       })
     },
     confirmSave() {
@@ -291,9 +291,6 @@ export default {
       this.listQuery.kipCount = currentPage * this.listQuery.maxResultCount - 1
       this.listQuery.kipCount = this.listQuery.kipCount > 0 ? this.listQuery.kipCount : 0
       getPagerList()
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val
     },
     handleSetRoles(scope) {
       this.roleDialogVisible = true

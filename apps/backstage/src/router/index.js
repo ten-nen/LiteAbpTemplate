@@ -47,6 +47,18 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
+  // {
+  //   path: '/report',
+  //   component: Layout,
+  //   name: 'Report',
+  //   meta: { title: '报表管理', icon: 'el-icon-s-data' },
+  //   children: [{
+  //     path: 'index',
+  //     name: 'Index',
+  //     component: () => import('@/views/report/index'),
+  //     meta: { title: '查看报表' }
+  //   }]
+  // },
   {
     path: '/404',
     component: () => import('@/views/404'),
