@@ -1,29 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>LiteAbp.Infrastructure</AssemblyName>
-    <RootNamespace>LiteAbp.Infrastructure</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LiteAbp.Infrastructure</AssemblyName>
+		<RootNamespace>LiteAbp.Infrastructure</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.0.1" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="5.0.1" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.0.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="5.0.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="5.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.0.1" />
+		<PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.0.1" />
+		<PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="5.0.1" />
+		<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="5.0.1" />
+		<PackageReference Condition="'$(mssql)' == '' OR '$(mssql)' == 'True' " Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="5.0.1" />
+		<PackageReference Condition="'$(mysql)' == 'True' " Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="5.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LiteAbp.Domain\LiteAbp.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LiteAbp.Domain\LiteAbp.Domain.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Data\Migrations\" />
+	</ItemGroup>
 
 </Project>

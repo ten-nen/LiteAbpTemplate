@@ -18,7 +18,11 @@ namespace LiteAbp.Infrastructure.Data
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<LiteAbpDbContext>()
+#if (mysql)
+                .UseMySql(configuration.GetConnectionString("Default"), MySqlServerVersion.LatestSupportedServerVersion);
+#else
                 .UseSqlServer(configuration.GetConnectionString("Default"));
+#endif
 
             return new LiteAbpDbContext(builder.Options);
         }
