@@ -61,9 +61,9 @@ service.interceptors.response.use(
     console.log('err' + error) // for debug
 
     if (error.response.status === 401) {
-      MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-        confirmButtonText: 'Re-Login',
-        cancelButtonText: 'Cancel',
+      MessageBox.confirm('您的登录状态已失效，是否立即跳转到登录页面？', '提示信息', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         store.dispatch('user/resetToken').then(() => {
