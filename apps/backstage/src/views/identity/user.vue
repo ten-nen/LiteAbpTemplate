@@ -11,7 +11,7 @@
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="getPagerList">
         查询
       </el-button>
-      <el-button v-if="hasPermission('Backstage.User.Create')" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
+      <el-button v-if="hasPermission('backstage.user.create')" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
         新增用户
       </el-button>
     </div>
@@ -47,15 +47,15 @@
           <el-switch
             v-model="row.isActive"
             active-color="#13ce66"
-            :disabled="row.isStatic||!hasPermission('Backstage.User.Update')"
+            :disabled="row.isStatic||!hasPermission('backstage.user.update')"
             @change="handleActive(row)"
           />
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作" width="300">
         <template slot-scope="scope">
-          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.User.Update')" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
-          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.User.SetRoles')" type="primary" size="small" @click="handleSetRoles(scope)">设置角色</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('backstage.ser.update')" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('backstage.user.setroles')" type="primary" size="small" @click="handleSetRoles(scope)">设置角色</el-button>
         </template>
       </el-table-column>
     </el-table>

@@ -1,4 +1,4 @@
-﻿using LiteAbp.Application.Dtos.Permission;
+﻿using LiteAbp.Application.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,6 @@ namespace LiteAbp.Application.Interfaces
 {
     public interface IPermissionService: IApplicationService
     {
-        Task<List<PermissionGroupDto>> GetAllListAsync();
+        List<PermissionDto> GetAll();
     }
 }

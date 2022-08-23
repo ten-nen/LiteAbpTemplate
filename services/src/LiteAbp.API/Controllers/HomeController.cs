@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace LiteAbp.API.Controllers
+namespace LiteAbp.Api.Controllers
 {
     public class HomeController : AbpController
     {

@@ -1,6 +1,5 @@
 ﻿using LiteAbp.Application;
-using LiteAbp.Application.Dtos.Identity;
-using LiteAbp.Application.Dtos.Permission;
+using LiteAbp.Application.Dtos;
 using LiteAbp.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,56 +9,56 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 
-namespace LiteAbp.API.Controllers.Backstage
+namespace LiteAbp.Api.Controllers.Backstage
 {
     public class RoleController : BackstageControllerBase
     {
-        protected AppServices AppServices { get; }
+        protected IRoleService RoleService { get; }
 
-        public RoleController(AppServices appServices)
+        public RoleController(IRoleService  identityRoleService)
         {
-            AppServices = appServices;
+            RoleService = identityRoleService;
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<List<IdentityRoleDto>> GetAllListAsync()
+        public async Task<List<RoleDto>> GetAllAsync()
         {
-            return await AppServices.RoleService.GetAllListAsync();
+            return await RoleService.GetAllAsync();
         }
 
         [HttpPost]
-        public async Task<IdentityRoleDto> CreateAsync([FromBody] IdentityRoleCreateDto input)
+        public async Task<RoleDto> CreateAsync([FromBody] RoleCreateDto input)
         {
-            return await AppServices.RoleService.CreateAsync(input);
+            return await RoleService.CreateAsync(input);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IdentityRoleDto> UpdateAsync([FromRoute] Guid id, [FromBody] IdentityRoleUpdateDto input)
+        public async Task<RoleDto> UpdateAsync([FromRoute] Guid id, [FromBody] RoleUpdateDto input)
         {
-            return await AppServices.RoleService.UpdateAsync(id, input);
+            return await RoleService.UpdateAsync(id, input);
         }
 
         [HttpDelete]
         [Route("{id}")]
         public async Task DeleteAsync([FromRoute] Guid id)
         {
-            await AppServices.RoleService.DeleteAsync(id);
+            await RoleService.DeleteAsync(id);
         }
 
         [HttpGet]
         [Route("{roleId}/Permissions")]
-        public async Task<List<PermissionInfoDto>> GetPermissionsAsync([FromRoute] string roleId)
+        public async Task<List<PermissionDto>> GetPermissionsAsync([FromRoute] string roleId)
         {
-            return await AppServices.RoleService.GetPermissions(roleId);
+            return await RoleService.GetPermissionsAsync(roleId);
         }
 
         [HttpPut]
         [Route("{roleId}/Permissions")]
-        public async Task UpdatePermissionsAsync([FromRoute] string roleId, [FromBody] List<IdentityRolePermissionsDtoBase> input)
+        public async Task UpdatePermissionsAsync([FromRoute] string roleId, [FromBody] List<RolePermissionsDtoBase> input)
         {
-            await AppServices.RoleService.UpdatePermissions(roleId, input);
+            await RoleService.UpdatePermissionsAsync(roleId, input);
         }
     }
 }

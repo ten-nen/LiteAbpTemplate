@@ -2,7 +2,7 @@
   <div class="app-container">
 
     <div class="filter-container">
-      <el-button v-if="hasPermission('Backstage.Role.Create')" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
+      <el-button v-if="hasPermission('backstage.role.create')" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleAdd">
         新增角色
       </el-button>
     </div>
@@ -15,9 +15,9 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="300">
         <template slot-scope="scope">
-          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.Role.Update')" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
-          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.Role.UpdatePermissions')" type="primary" size="small" @click="handlePermission(scope)">授权</el-button>
-          <el-button v-if="!scope.row.isStatic&&hasPermission('Backstage.Role.Delete')" type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('backstage.role.update')" type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('backstage.role.updatepermissions')" type="primary" size="small" @click="handlePermission(scope)">授权</el-button>
+          <el-button v-if="!scope.row.isStatic&&hasPermission('backstage.role.delete')" type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

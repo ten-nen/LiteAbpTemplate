@@ -1,4 +1,5 @@
-﻿using LiteAbp.Application.Dtos.Identity;
+﻿using LiteAbp.Application.Dtos;
+using LiteAbp.Application.Interfaces;
 using LiteAbp.Extensions.Abp.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -16,33 +17,25 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.AspNetCore;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
-using UserLoginInfo = LiteAbp.API.Controllers.Models.UserLoginInfo;
 
-namespace LiteAbp.API.Controllers
+namespace LiteAbp.Api.Controllers
 {
     [Route("api/[controller]")]
     public class AuthController : AbpControllerBase
     {
-        protected AppServices AppServices { get; }
+        protected IUserService UserService { get; }
         protected IConfiguration Configuration { get; }
-        public AuthController(AppServices appServices, IConfiguration configuration)
+        public AuthController(IUserService  identityUserService, IConfiguration configuration)
         {
-            AppServices = appServices;
+            UserService = identityUserService;
             Configuration = configuration;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<object> LoginAsync([FromBody] UserLoginInfo user)
+        public async Task<UserDto> LoginAsync([FromBody] UserLoginDto user)
         {
-            (IdentityUserDto user, string token) r = await AppServices.UserService.LoginAsync(user.UserName, user.Password, user.RememberMe);
-            return new { r.user, r.token };
-        }
-
-        [HttpDelete]
-        public async Task LogoutAsync()
-        {
-            await AppServices.UserService.LogoutAsync(CurrentUser.UserName);
+            return await UserService.LoginAsync(user.UserName, user.Password);
         }
     }
 }

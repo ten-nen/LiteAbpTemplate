@@ -23,7 +23,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Cors;
 using LiteAbp.Extensions;
 
-namespace LiteAbp.API
+namespace LiteAbp.Api
 {
     [DependsOn(
         typeof(LiteAbpExtensionsModule),
@@ -157,10 +157,6 @@ namespace LiteAbp.API
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
-
-
-            //var schemes = context.ServiceProvider.GetService<IAuthenticationSchemeProvider>();
-            //var sc = schemes.GetAllSchemesAsync();
         }
     }
 }

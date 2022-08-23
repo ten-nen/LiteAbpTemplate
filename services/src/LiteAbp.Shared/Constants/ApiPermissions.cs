@@ -8,8 +8,8 @@ namespace LiteAbp.Shared.Constants
 {
     public static class ApiPermissions
     {
-        public const string Backstage = "Backstage";
-        public const string Forestage = "Forestage";
+        public const string Backstage = "backstage";
+        public const string Forestage = "forestage";
         public static string[] GetAll()
         {
             return ReflectionHelper.GetPublicConstantsRecursively(typeof(ApiPermissions));

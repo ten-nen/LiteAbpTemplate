@@ -6,7 +6,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <AssemblyName>LiteAbp.Api</AssemblyName>
-    <RootNamespace>LiteAbp.Api</RootNamespace>
+    <RootNamespace>LiteAbp.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

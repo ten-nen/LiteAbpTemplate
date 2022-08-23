@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 
-namespace LiteAbp.Infrastructure.EfCoreRepositories
+namespace LiteAbp.Infrastructure.Repositories
 {
-    public class EfCoreIdentityUserProRepository : EfCoreIdentityUserRepository, IIdentityUserProRepository
+    public class UserRepository : EfCoreIdentityUserRepository, IUserRepository
     {
-        public EfCoreIdentityUserProRepository(IDbContextProvider<IIdentityDbContext> dbContextProvider)
+        public UserRepository(IDbContextProvider<IIdentityDbContext> dbContextProvider)
         : base(dbContextProvider)
         {
         }

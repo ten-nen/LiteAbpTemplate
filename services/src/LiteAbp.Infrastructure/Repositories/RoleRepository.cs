@@ -10,11 +10,11 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 
-namespace LiteAbp.Infrastructure.EfCoreRepositories
+namespace LiteAbp.Infrastructure.Repositories
 {
-    public class EfCoreIdentityRoleProRepository : EfCoreIdentityRoleRepository, IIdentityRoleProRepository
+    public class RoleRepository : EfCoreIdentityRoleRepository, IRoleRepository
     {
-        public EfCoreIdentityRoleProRepository(IDbContextProvider<IIdentityDbContext> dbContextProvider)
+        public RoleRepository(IDbContextProvider<IIdentityDbContext> dbContextProvider)
         : base(dbContextProvider)
         {
         }

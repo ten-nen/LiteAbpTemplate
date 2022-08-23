@@ -82,19 +82,19 @@ export const asyncRoutes = [
     path: '/identity',
     component: Layout,
     name: 'Identity',
-    meta: { title: '用户和角色', icon: 'el-icon-user-solid', permissions: ['Backstage.User', 'Backstage.Role'] },
+    meta: { title: '用户和角色', icon: 'el-icon-user-solid', permissions: ['backstage.user', 'backstage.role'] },
     children: [
       {
         path: 'user',
         name: 'User',
         component: () => import('@/views/identity/user'),
-        meta: { title: '用户管理', permissions: ['Backstage.User'] }
+        meta: { title: '用户管理', permissions: ['backstage.user'] }
       },
       {
         path: 'role',
         name: 'Role',
         component: () => import('@/views/identity/role'),
-        meta: { title: '角色管理', permissions: ['Backstage.Role'] }
+        meta: { title: '角色管理', permissions: ['backstage.role'] }
       }
     ]
   },

@@ -32,22 +32,28 @@ namespace LiteAbp.Extensions.Abp.Authorization.Permissions
 
         public virtual Task SeedAsync(DataSeedContext context)
         {
-            var multiTenancySide = CurrentTenant.GetMultiTenancySide();
-            var permissionNames = PermissionDefinitionManager
-                .GetPermissions()
-                .Where(p => p.MultiTenancySide.HasFlag(multiTenancySide))
-                .Where(p => !p.Providers.Any() || p.Providers.Contains(RolePathPermissionValueProvider.ProviderName))
-                .Select(p => p.Name)
-                .ToArray();
+            return Task.CompletedTask;
 
-            var role = RoleRepository.FindByNormalizedNameAsync("ADMIN").Result;
+            #region DefaultUser Permission Seed Demo
 
-            return PermissionDataSeeder.SeedAsync(
-                    RolePathPermissionValueProvider.ProviderName,
-                    role.Id.ToString(),
-                    permissionNames,
-                    context?.TenantId
-                );
+            //var multiTenancySide = CurrentTenant.GetMultiTenancySide();
+            //var permissionNames = PermissionDefinitionManager
+            //        .GetPermissions()
+            //        .Where(p => p.MultiTenancySide.HasFlag(multiTenancySide))
+            //        .Where(p => !p.Providers.Any() || p.Providers.Contains(RolePathPermissionValueProvider.ProviderName))
+            //        .Select(p => p.Name)
+            //        .ToArray();
+
+            //var role = RoleRepository.FindByNormalizedNameAsync("DefaultUser").Result;
+
+            //return PermissionDataSeeder.SeedAsync(
+            //        RolePathPermissionValueProvider.ProviderName,
+            //        role.Id.ToString(),
+            //        permissionNames,
+            //        context?.TenantId
+            //    ); 
+
+            #endregion
         }
     }
 }

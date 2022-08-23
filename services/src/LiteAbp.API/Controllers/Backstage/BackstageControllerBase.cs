@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace LiteAbp.API.Controllers.Backstage
+namespace LiteAbp.Api.Controllers.Backstage
 {
     [Route("api/backstage/[controller]")]
     [Authorize(ApiPermissions.Backstage)]

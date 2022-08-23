@@ -38,15 +38,20 @@ namespace LiteAbp.Extensions.Abp.Authorization.Permissions
                 return PermissionGrantResult.Undefined;
             }
 
+            if (roles.Any(x => x == "admin"))
+            {
+                return PermissionGrantResult.Granted;
+            }
+
             var httpContext = _httpContextAccessor.HttpContext;
             var routeData = httpContext.GetRouteData();
-            var controller = routeData?.Values["controller"]?.ToString();
-            var action = routeData?.Values["action"]?.ToString();
+            var controller = routeData?.Values["controller"]?.ToString().ToLower();
+            var action = routeData?.Values["action"]?.ToString().ToLower();
 
             var roleInfos = await RoleRepository.GetListAsync();
             foreach (var roleInfo in roleInfos.Where(x => roles.Contains(x.Name)).Distinct())
             {
-                if (await PermissionStore.IsGrantedAsync($"{context.Permission.Name}.{controller}.{action}", Name, roleInfo.Id.ToString()))
+                if (await PermissionStore.IsGrantedAsync($"{context.Permission.Name?.ToLower()}.{controller}.{action}", Name, roleInfo.Id.ToString()))
                 {
                     return PermissionGrantResult.Granted;
                 }
@@ -78,14 +83,24 @@ namespace LiteAbp.Extensions.Abp.Authorization.Permissions
                 return result;
             }
 
+
+            if (roles.Any(x => x == "admin"))
+            {
+                foreach (var key in result.Result.Keys)
+                {
+                    result.Result[key] = PermissionGrantResult.Granted;
+                }
+                return result;
+            }
+
             var httpContext = _httpContextAccessor.HttpContext;
             var routeData = httpContext.GetRouteData();
-            var controller = routeData?.Values["controller"]?.ToString();
-            var action = routeData?.Values["action"]?.ToString();
+            var controller = routeData?.Values["controller"]?.ToString().ToLower();
+            var action = routeData?.Values["action"]?.ToString().ToLower();
 
             foreach (var role in roles.Distinct())
             {
-                var multipleResult = await PermissionStore.IsGrantedAsync(permissionNames.Select(v => $"{v}.{controller}.{action}").ToArray(), Name, role);
+                var multipleResult = await PermissionStore.IsGrantedAsync(permissionNames.Select(v => $"{v?.ToLower()}.{controller}.{action}").ToArray(), Name, role);
 
                 foreach (var grantResult in multipleResult.Result.Where(grantResult =>
                     result.Result.ContainsKey(grantResult.Key) &&

@@ -10,11 +10,11 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 
-namespace LiteAbp.Infrastructure.EfCoreRepositories
+namespace LiteAbp.Infrastructure.Repositories
 {
-    public class EfCorePermissionGrantProRepository: EfCorePermissionGrantRepository, IPermissionGrantProRepository
+    public class PermissionRepository: EfCorePermissionGrantRepository, IPermissionRepository
     {
-        public EfCorePermissionGrantProRepository(IDbContextProvider<IPermissionManagementDbContext> dbContextProvider)
+        public PermissionRepository(IDbContextProvider<IPermissionManagementDbContext> dbContextProvider)
         : base(dbContextProvider)
         {
 

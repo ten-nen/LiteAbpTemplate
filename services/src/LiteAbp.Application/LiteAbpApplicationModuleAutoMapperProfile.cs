@@ -1,5 +1,4 @@
-﻿using LiteAbp.Application.Dtos.Identity;
-using AutoMapper;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Identity;
 using Volo.Abp.PermissionManagement;
-using LiteAbp.Application.Dtos.Permission;
+using LiteAbp.Application.Dtos;
 using Volo.Abp.Authorization.Permissions;
 
 namespace LiteAbp.Application
@@ -16,19 +15,19 @@ namespace LiteAbp.Application
     {
         public LiteAbpApplicationModuleAutoMapperProfile()
         {
-            CreateMap<IdentityUser, IdentityUserDto>()
+            CreateMap<IdentityUser, UserDto>()
                 .MapExtraProperties();
 
-            CreateMap<IdentityUserCreateDto,IdentityUser>()
+            CreateMap<UserCreateDto,IdentityUser>()
                 .MapExtraProperties();
 
-            CreateMap<IdentityUserUpdateDto,IdentityUser>()
+            CreateMap<UserUpdateDto,IdentityUser>()
                 .MapExtraProperties();
 
-            CreateMap<IdentityRole, IdentityRoleDto>()
+            CreateMap<IdentityRole, RoleDto>()
                 .MapExtraProperties();
 
-            CreateMap<PermissionGrant, PermissionGrantInfoDto>();
+            CreateMap<PermissionGrant, PermissionInfoDto>();
         }
     }
 }

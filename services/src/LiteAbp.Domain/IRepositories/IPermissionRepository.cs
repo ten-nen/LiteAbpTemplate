@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Volo.Abp.Identity;
+using Volo.Abp.PermissionManagement;
 
 namespace LiteAbp.Domain.IRepositories
 {
-    public interface IIdentityRoleProRepository: IIdentityRoleRepository
+    public interface IPermissionRepository: IPermissionGrantRepository
     {
-        Task<List<IdentityRole>> GetLisByIdsAsync(
-        Guid[] ids,
-        bool includeDetails = true,
+        Task<List<PermissionGrant>> GetListAsync(
+        string providerName,
+        string[] providerKeys,
         CancellationToken cancellationToken = default);
     }
 }

@@ -35,53 +35,49 @@ export function filterAsyncRoutes(routes, permissions) {
 }
 
 export const clientPermissions = [{
-  title: '后台',
-  name: 'Backstage',
+  title: '用户管理',
+  name: 'backstage.user',
   permissions: [{
-    title: '用户管理',
-    name: 'Backstage.User',
-    permissions: [{
-      title: '用户列表',
-      name: 'Backstage.User.GetPagerList'
-    }, {
-      title: '新增用户',
-      name: 'Backstage.User.Create'
-    }, {
-      title: '编辑用户',
-      name: 'Backstage.User.Update'
-    }, {
-      title: '设置角色',
-      name: 'Backstage.User.SetRoles',
-      permissions: [{
-        title: 'Backstage.Role.GetAllList',
-        name: 'Backstage.Role.GetAllList'
-      }, {
-        title: 'Backstage.User.GetRoles',
-        name: 'Backstage.User.GetRoles'
-      }]
-    }]
+    title: '用户列表',
+    name: 'backstage.user.getpager'
   }, {
-    title: '角色管理',
-    name: 'Backstage.Role',
+    title: '新增用户',
+    name: 'backstage.user.create'
+  }, {
+    title: '编辑用户',
+    name: 'backstage.user.update'
+  }, {
+    title: '设置角色',
+    name: 'backstage.user.setroles',
     permissions: [{
-      title: '角色列表',
-      name: 'Backstage.Role.GetAllList'
+      title: 'backstage.role.getall',
+      name: 'backstage.role.getall'
     }, {
-      title: '新增角色',
-      name: 'Backstage.Role.Create'
-    }, {
-      title: '编辑角色',
-      name: 'Backstage.Role.Update'
-    }, {
-      title: '删除角色',
-      name: 'Backstage.Role.Delete'
-    }, {
-      title: '授权功能',
-      name: 'Backstage.Role.UpdatePermissions',
-      permissions: [{
-        title: 'Backstage.Role.GetPermissions',
-        name: 'Backstage.Role.GetPermissions'
-      }]
+      title: 'backstage.user.getroles',
+      name: 'backstage.user.getroles'
+    }]
+  }]
+}, {
+  title: '角色管理',
+  name: 'backstage.role',
+  permissions: [{
+    title: '角色列表',
+    name: 'backstage.role.getall'
+  }, {
+    title: '新增角色',
+    name: 'backstage.role.create'
+  }, {
+    title: '编辑角色',
+    name: 'backstage.role.update'
+  }, {
+    title: '删除角色',
+    name: 'backstage.role.delete'
+  }, {
+    title: '授权功能',
+    name: 'backstage.role.updatepermissions',
+    permissions: [{
+      title: 'backstage.role.getpermissions',
+      name: 'backstage.role.getpermissions'
     }]
   }]
 }]

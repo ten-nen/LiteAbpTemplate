@@ -7,7 +7,7 @@ using Volo.Abp.Identity;
 
 namespace LiteAbp.Domain.IRepositories
 {
-    public interface IIdentityUserProRepository: IIdentityUserRepository
+    public interface IUserRepository: IIdentityUserRepository
     {
     }
 }

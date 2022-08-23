@@ -8,13 +8,6 @@ export function login(data) {
   })
 }
 
-export function logout() {
-  return request({
-    url: '/auth',
-    method: 'delete'
-  })
-}
-
 export function getPagerList(query) {
   return request({
     url: '/backstage/user',

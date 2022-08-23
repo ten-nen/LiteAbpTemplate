@@ -1,4 +1,4 @@
-﻿using LiteAbp.Application.Dtos.Permission;
+﻿using LiteAbp.Application.Dtos;
 using LiteAbp.Application.Interfaces;
 using LiteAbp.Extensions.Abp.Authorization.Permissions;
 using Microsoft.Extensions.Options;
@@ -16,37 +16,38 @@ namespace LiteAbp.Application.Services
 {
     public class PermissionService : ApplicationService, IPermissionService
     {
-        protected AppManagers AppManagers { get; }
+        protected IPermissionDefinitionManager PermissionDefinitionManager { get; }
         protected PermissionManagementOptions Options { get; }
 
         public PermissionService(
-            AppManagers  appManagers,
-            IOptions<PermissionManagementOptions> options)
+            IOptions<PermissionManagementOptions> options,
+            IPermissionDefinitionManager permissionDefinitionManager)
         {
+            PermissionDefinitionManager = permissionDefinitionManager;
             Options = options.Value;
-            AppManagers = appManagers;
         }
-        public virtual async Task<List<PermissionGroupDto>> GetAllListAsync()
+        public virtual List<PermissionDto> GetAll()
         {
-            var groups = new List<PermissionGroupDto>();
+            var groups = new List<PermissionDto>();
 
 
-            foreach (var group in AppManagers.PermissionDefinitionManager.GetGroups())
+            foreach (var group in PermissionDefinitionManager.GetGroups())
             {
-                var groupDto = new PermissionGroupDto
+                var groupDto = new PermissionDto
                 {
                     Name = group.Name,
-                    Permissions = new List<PermissionInfoDto>()
+                    ParentName = "",
+                    Permissions = new List<PermissionDto>()
                 };
                 var allPermissions = group.GetPermissionsWithChildren();
                 groupDto.Permissions = allPermissions
                                             .Where(x => x.Providers.Contains(RolePathPermissionValueProvider.ProviderName) && x.Name != group.Name && x.Parent?.Name == null)
-                                            .Select(x => new PermissionInfoDto()
+                                            .Select(x => new PermissionDto()
                                             {
                                                 Name = x.Name,
                                                 ParentName = groupDto.Name,
                                                 Permissions = allPermissions.Where(c => c.Providers.Contains(RolePathPermissionValueProvider.ProviderName) && c.Parent?.Name == x.Name)
-                                                                                    .Select(c => new PermissionInfoDto() { Name = c.Name, ParentName = x.Name, Permissions = new List<PermissionInfoDto>() })
+                                                                                    .Select(c => new PermissionDto() { Name = c.Name, ParentName = x.Name, Permissions = new List<PermissionDto>() })
                                                                                     .ToList()
                                             })
                                             .ToList();

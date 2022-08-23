@@ -1,4 +1,5 @@
 ﻿using LiteAbp.Application;
+using LiteAbp.Application.Dtos;
 using LiteAbp.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -8,21 +9,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LiteAbp.API.Controllers.Backstage
+namespace LiteAbp.Api.Controllers.Backstage
 {
     public class PermissionController : BackstageControllerBase
     {
-        protected AppServices AppServices { get; }
+        protected IPermissionService PermissionService { get; }
 
-        public PermissionController(AppServices appServices)
+        public PermissionController(IPermissionService  permissionService)
         {
-            AppServices = appServices;
+            PermissionService = permissionService;
         }
 
         [HttpGet]
-        public async Task<object> GetAllListAsync()
+        public List<PermissionDto> GetAll()
         {
-            return await AppServices.PermissionService.GetAllListAsync();
+            return PermissionService.GetAll();
         }
     }
 }
