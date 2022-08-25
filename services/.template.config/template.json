@@ -1,0 +1,39 @@
+{
+    "author": "Rick Li",
+    "classifications": [ "WebAPI" ],
+    "name": "LiteAbpTemplate",
+    "identity": "LiteAbpTemplate",
+    "shortName": "lat",
+    "tags": {
+      "language": "C#" ,
+      "type":"project"
+    },
+    "sourceName": "LiteAbp",
+    "preferNameDirectory": true,
+	 "symbols":{
+    "sqlType": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "mssql",
+          "description": "MS SQL Server"
+        },
+        {
+          "choice": "mysql",
+          "description": "MySQL"
+        }
+      ],
+      "defaultValue": "mssql",
+      "description": "The type of SQL to use"
+    },  
+    "mssql": {
+      "type": "computed",
+      "value": "(sqlType == \"mssql\")"
+    },
+    "mysql": {
+      "type": "computed",
+      "value": "(sqlType == \"mysql\")"
+    }
+  }
+}
