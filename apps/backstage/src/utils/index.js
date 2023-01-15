@@ -355,5 +355,5 @@ export function removeClass(ele, cls) {
 }
 
 export function hasPermission(permission) {
-  return store.getters.permissions.filter(x => x.name === permission).length > 0
+  return store.getters.permissions && store.getters.permissions.filter(x => x.name === permission).length > 0
 }
