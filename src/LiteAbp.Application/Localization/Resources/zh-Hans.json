@@ -1,0 +1,16 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Permission:Api": "Api",
+    "Permission:Api.Roles": "角色管理",
+    "Permission:Api.Roles.Create": "新增角色",
+    "Permission:Api.Roles.Update": "编辑角色",
+    "Permission:Api.Roles.Delete": "删除角色",
+    "Permission:Api.Roles.UpdatePermissions": "授权",
+    "Permission:Api.Users": "用户管理",
+    "Permission:Api.Users.Create": "新增用户",
+    "Permission:Api.Users.Update": "编辑用户",
+    "Permission:Api.Users.Delete": "删除用户",
+    "Permission:Api.Users.SetRoles": "设置角色"
+  }
+}
